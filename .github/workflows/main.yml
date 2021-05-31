@@ -27,4 +27,4 @@ jobs:
           role: "BI_DATA_ENGINEER"
           slack-token: "xoxb-10049520935-1494791191025-cmnSU5fK9sF0Hq7lmQEN9tVA"
           sql: "SELECT * FROM record_breaker"
-          template-path: /github/workspace/templates
+          template-path: /github/workspace/template
