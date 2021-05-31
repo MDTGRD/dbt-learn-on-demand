@@ -11,14 +11,20 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2.3.3
+      - run: 'echo "$RSA_KEY" > rsa_key.p8'
+        shell: bash
+        env:
+          RSA_KEY: ${{secrets.RSA_KEY}}
       - name: Slack message 1
-        uses: offbi/snowflake-to-slack@1.0.0
+        uses: offbi/snowflake-to-slack@1.0.1
         with:
           user: ${{ secrets.USER }}
-          password: "${{ secrets.PASSWORD }}"
-          account: "qz86222"
+          rsa-key-uri: /github/workspace/rsa_key.p8
+          private-key-pass: ${{ secrets.PRIVATE_KEY_PASS }}
+          account: "qz86222.eu-central-1"
           warehouse: "BI_TEAM_WH"
           database: "DBT_DEV"
           role: "BI_DATA_ENGINEER"
           slack-token: "xoxb-10049520935-1494791191025-cmnSU5fK9sF0Hq7lmQEN9tVA"
           sql: "SELECT * FROM record_breaker"
+          template-path: /github/workspace/templates
